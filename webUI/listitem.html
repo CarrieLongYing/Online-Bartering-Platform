@@ -1,0 +1,81 @@
+$var pagename : listitem
+
+<div class="w3-twothird w3-container">
+<h1 class="w3-text-teal">Trade Plaza: Listing an item</h1>
+
+<form action="/listitem/" method="post">
+    <table cellpadding="10" cellspacing="1" style="margin-top:-40;margin-right:0;margin-left:0;">
+        <tbody>
+            <tr>
+                <td>Game Type</td>
+                <td width="300px">
+                    <select name="game_type" id="game_type">
+                        <option selected value="PLEASE SELECT">PLEASE SELECT</option>
+                        <option value="Video Game">Video Game</option>
+                        <option value="Playing Card Game">Playing Card Game</option>
+                        <option value="Collectible Card Game">Collectible Card Game</option>
+                        <option value="Computer Game">Computer Game</option>
+                        <option value="Board Game">Board Game</option>
+                      </select>
+                </td>
+            <tr>
+                    <td><strong>Title</strong></td>
+                    <td><input id="title" type="text" name="title" size="25" value=""/></td>
+            </tr>
+            
+            <tr>
+                <td>Condition</td>
+                <td>
+                    <select name="item_condition" id="item_condition">
+                        <option value="Like New">Like New</option>
+                        <option value="Unopened">Unopened</option>
+                        <option value="Damaged/Missing parts">Damaged/Missing parts</option>
+                        <option value="Lightly Used">Lightly Used</option>
+                        <option value="Heavily Used">Heavily Used</option>
+                        <option value="Moderately Used">Moderately Used</option>
+                    </select>  
+                </td>              
+            </tr>
+            
+            <tr id="platform_type_selector" hidden=>
+                <td><strong>Platform Type</strong></td>
+                <td>                    
+                    <select name="platform_type" id="platform_type">
+                    <option value="Nintendo">Nintendo</option>
+                    <option value="macOS">macOS</option>
+                    <option value="Xbox">Xbox</option>
+                    <option value="Windows">Windows</option>
+                    <option value="PlayStation">PlayStationd</option>
+                    <option value="Linux">Linux</option>
+                </select>  </td>
+            </tr>
+
+            <tr id="media_selector">
+                <td><strong>Media</strong></td>
+                <td>
+                    <select name="media" id="media">
+                        <option value="Optical disc">Optical disc</option>
+                        <option value="Game card">Game card</option>
+                        <option value="Cartridge">Cartridge</option>
+                    </select>
+                </td>
+            </tr>
+            
+            <tr id="card_selector">
+                <td><strong>Number of Offered Card</strong></td>
+                <td><input id="number_of_offered_card" type="text" name="number_of_offered_card" size="25" value=""/></td>
+            </tr>
+
+            <tr>
+                <td><strong>Description</strong></td>
+                <td><input id="description" type="text" name="description" size="25" value=""/></td>
+            </tr>            
+        </tbody>
+    </table>
+    <input type="Submit" value ="ListItem" />
+</form>
+</div>
+<script src="../static/js/listitem.js"></script>
+
+$if session.get('listItemSuccessMessage'):
+    <script>alert("$session.get('listItemSuccessMessage')")</script>

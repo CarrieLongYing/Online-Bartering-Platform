@@ -1,0 +1,90 @@
+$def with (tradeDetail, counterpartyDetail, proposed_item_detail, desired_item_detail)
+$var pagename : Trade Detail
+
+<div class="css-content">
+    <h1 class="w3-text-teal">Trade Detail</h1>
+    $if tradeDetail:
+        <table>
+            <caption>Trade Detail</caption>
+            <tr>
+                <th>Proposed</th>
+                <th>Accepted/Rejected</th>
+                <th>Status</th>
+                <th>My Role</th>
+                <th>Response Time (days)</th>
+            </tr>
+            $for record in tradeDetail:
+                <tr>
+                    <th>$record['proposed_date']</th>
+                    <th>$record['accepted_rejected_date']</th>
+                    <th>$record['trade_status']</th>
+                    <th>$record['my_role']</th>
+                    <th>$record['response_time']</th>
+                </tr>
+        </table>
+     <br />
+     <br />
+
+    $if counterpartyDetail:
+        <table>
+            <caption>User Details</caption>
+            <tr>
+                <th>Nickname</th>
+                <th>Distance (miles)</th>
+                <th>Name</th>
+                <th>Email</th>
+            </tr>
+            $for record in counterpartyDetail:
+                <tr>
+                    <th>$record['Nickname']</th>
+                    <th>$record['Distance']</th>
+                    <th>$record['Name']</th>
+                    <th>$record['Email']</th>
+                </tr>
+        </table>
+    <br />
+    <br />
+
+    $if proposed_item_detail:
+        <table>
+            <caption>Proposed Item</caption>
+            <tr>
+                <th>Item #</th>
+                <th>Title</th>
+                <th>Game type</th>
+                <th>Condition</th>
+                <th>Description</th>
+            </tr>
+            $for record in proposed_item_detail:
+                <tr>
+                    <th>$record['itemID']</th>
+                    <th>$record['title']</th>
+                    <th>$record['game_type']</th>
+                    <th>$record['item_condition']</th>
+                    <th>$record['description']</th>
+                </tr>
+        </table>
+    <br />
+    <br />
+
+    $if desired_item_detail:
+        <table>
+            <caption>Desired Item</caption>
+            <tr>
+                <th>Item #</th>
+                <th>Title</th>
+                <th>Game type</th>
+                <th>Condition</th>
+                <th>Description</th>
+            </tr>
+            $for record in desired_item_detail:
+                <tr>
+                    <th>$record['itemID']</th>
+                    <th>$record['title']</th>
+                    <th>$record['game_type']</th>
+                    <th>$record['item_condition']</th>
+                    <th>$record['description']</th>
+                </tr>
+        </table>
+
+</div>

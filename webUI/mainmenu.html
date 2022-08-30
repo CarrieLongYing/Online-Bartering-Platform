@@ -1,0 +1,108 @@
+$def with (number_of_unaccepted_trade_counterparty, response_time, user_rank, first_name, last_name, nickname)
+$var pagename : MainMenu
+
+<div class="css-content">
+<h1 class="w3-text-teal">Trade Plaza</h1>
+
+<head>
+    <style>
+    table, th, td {
+        border: 1px solid black;
+    }
+
+    th {
+        background:hsl(170, 83%, 66%); 
+    }
+    </style>
+</head>
+
+<div class="container">
+    <p> Welcome $first_name $last_name ($nickname)!</p>
+    <div style="width: 150px; float:left; margin:10px">
+        <table style="text-align:center">    
+            <caption><strong>Unaccepted Trades</strong></caption>  
+            $if number_of_unaccepted_trade_counterparty == None:
+                <tr><td>0</td></tr>       
+            $elif number_of_unaccepted_trade_counterparty >= 2:
+                <tr><td style="color:red;"><a href="/acceptrejecttrades/">$number_of_unaccepted_trade_counterparty</a></td></tr>
+            $elif number_of_unaccepted_trade_counterparty > 0:
+                <tr><td><a href="/acceptrejecttrades/">$number_of_unaccepted_trade_counterparty</a></td></tr>
+            $else:
+                <tr><td>$number_of_unaccepted_trade_counterparty</td></tr>
+        </table>
+        <br />
+        <table style="text-align:center">    
+            <caption><strong>Response Time (days)</strong></caption> 
+            $if response_time == None or response_time == -1:          
+                <tr><td>None</td></tr>
+            $elif response_time <= 7:          
+                <tr><td style="color:green;"></tdstyle>$response_time</td></tr>
+            $elif response_time <= 14:          
+                <tr><td style="color:yellow;"></tdstyle>$response_time</td></tr>
+            $elif response_time <= 21:          
+                <tr><td style="color:orange;"></tdstyle>$response_time</td></tr>
+            $elif response_time <= 28:          
+                <tr><td style="color:red;"></tdstyle>$response_time</td></tr>
+            $else:          
+                <tr><td style="color:red;"></tdstyle><strong>$response_time</strong></td></tr>
+        </table>
+        <br />
+        <table style="text-align:center">    
+            <caption><strong>My Rank</strong></caption>             
+            <tr><td>$user_rank</td></tr>
+        </table>
+        
+    </div>
+    
+
+    
+    <div style="width: 100px; float:left; margin:10px">
+
+
+        <tr>
+            <th>
+                <form action="/listitem/" >
+                    <input type="hidden" id="" name="listitem" value=''>
+                    <button class="btn btn-success" style="width: 100%;">List An Item</button>
+                </form>
+            </th>
+        </tr>
+
+        <tr>
+            <th>
+                <form action="/myitem/" >
+                    <input type="hidden" id="" name="myitem" value=''>
+                    <button class="btn btn-success" style="width: 100%;"> My Item </button>
+                </form>
+            </th>
+        </tr>
+                
+        <tr>
+            <th>
+                <form action="/search/" >
+                    <input type="hidden" id="" name="searchitem" value=''>
+                    <button class="btn btn-success" style="width: 100%;">Search Items</button>
+                </form>
+            </th>
+        </tr>
+                
+        <tr>
+            <th>
+                <form action="/tradehistory/" >
+                    <input type="hidden" id="" name="tradehistory" value=''>
+                    <button class="btn btn-success" style="width: 100%;">Trade History</button>
+                </form>
+            </th>
+        </tr>
+        <td colspan="2" align="right">
+            <p id="loginMessage">
+              $if session.get('loginMessage'):
+                $session.get('loginMessage')
+              $else:
+                ${None}
+            </p>
+        </td>
+
+    </div>
+
+</div>

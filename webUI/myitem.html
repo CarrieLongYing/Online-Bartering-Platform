@@ -1,0 +1,53 @@
+$def with (itemCounts,total_count,myItemCounts2)
+$var pagename : Myitem
+
+<p>Trade Plaza</p>    
+<div class="w3-twothird w3-container">
+<h1 class="w3-text-teal">My Items</h1>
+
+<h2>Item Counts</h2>
+<table>
+  <tr>
+    $for item in itemCounts:
+        <th>$item</th>
+    <th>Total</th>
+  </tr>
+  <tr>
+    $for item in itemCounts:
+        <th>$itemCounts[item]</th>
+    <th>$total_count</th>
+  </tr>
+<table>
+
+  <h2>My Items</h2>
+  <table>
+    <tr>
+      <th>Item #</th>
+      <th>Game Type</th>
+      <th>Title</th>
+      <th>Condition</th>
+      <th>Description</th>
+      <th></th>
+    </tr>
+    $for record in myItemCounts2:
+    <tr>
+        <th>$record['itemID']</th>
+        <th>$record['game_type']</th>
+        <th>$record['title']</th>
+        <th>$record['item_condition']</th>
+        <th><p>$record['description']</p></th>
+        <th>
+            <form action="/selectItemDetail/" method="post">
+                <input type="hidden" id="itemID" name="itemID" value=$record['itemID']>
+                <input type="hidden" id="notDisplay" name="notDisplay" value="notDisplay">
+                <button class="btn btn-success">Detail</button>
+            </form>
+        </th>
+    </tr>
+    
+  </table>
+</div>
+
+
+
+

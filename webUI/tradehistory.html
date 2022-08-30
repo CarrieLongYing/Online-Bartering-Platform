@@ -1,0 +1,61 @@
+$def with (tradeSummary, allTrades)
+$var pagename : Trade History
+
+<div class="css-content">
+<h1 class="w3-text-teal">Trade History</h1>
+$if tradeSummary:
+    <table>
+        <tr>
+        <th>My Role</th>
+        <th>Total</th>
+        <th>Accepted</th>
+        <th>Rejected</th>
+        <th>Rejected %</th>
+        </tr>
+    $for record in tradeSummary:
+        <tr>
+            <th>$record['my_role']</th>
+            <th>$record['total']</th>
+            <th>$record['accepted']</th>
+            <th>$record['rejected']</th>
+
+            $if record['rejected_percent'] >= 50:
+                <th style="background-color:red">$record['rejected_percent']</th>
+            $else:
+                <th>$record['rejected_percent']</th>
+        </tr>
+    </table>
+<br />
+$if allTrades:
+    <table>
+        <tr>
+        <th>Proposed Date</th>
+        <th>Accepted/Rejected Date</th>
+        <th>Trade Status</th>
+        <th>Response Time (days)</th>
+        <th>My Role</th>
+        <th>Proposed Item</th>
+        <th>Desired Item</th>
+        <th>Other User</th>
+        <th></th>
+        </tr>
+    $for record in allTrades:
+        <tr>
+            <th>$record['proposed_date']</th>
+            <th>$record['accepted_rejected_date']</th>
+            <th>$record['trade_status']</th>
+            <th>$record['response_time']</th>
+            <th>$record['my_role']</th>
+            <th>$record['proposed_item']</th>
+            <th>$record['desired_item']</th>
+            <th>$record['other_user']</th>
+            <th>
+                <form action="/tradedetail/" method="post">
+                    <input type="hidden" id="tradeID" name="tradeID" value=$record['tradeID']>
+                    <button class="btn btn-success">Detail</button>
+                </form>
+            </th>
+        </tr>
+    </table>
+
+</div>

@@ -1,0 +1,72 @@
+$def with (proposedTrades,proposerEmail)
+
+$var pagename : AcceptRejectTrades
+<!doctype html>
+<html>
+<head>
+    Accept/reject trades
+</head>
+
+<body>
+<h1 class="w3-text-teal">Trade Detail</h1>
+
+<!-- <form action="/acceptrejecttrades/" method="post"> -->
+$if proposedTrades:
+    <table>
+        <caption>Please choose your proposed item:</caption>
+        <th>Proposer Email</th>
+        <th>Date</th>
+        <th>Desired Item</th>
+        <th>Proposer</th>
+        <th>Rank</th>
+        <th>Distance</th>
+        <th>Proposed Item</th>
+
+        </tr>
+    $for record in proposedTrades:
+        <tr>
+            <th>$record['proposer_email']</th>
+            <th>$record['proposed_date']</th>
+            <th>
+                <form action="/selectItemDetail/" method="post">
+                    <input type="hidden" id="itemID" name="itemID" value=$record['desired_itemID']>
+                    <input type="hidden" id="userDetails" name="notDisplay" value="notDisplay">
+                    <button class="btn btn-success">$record['desiredTitle']</button>
+                </form>
+            </th>
+            <th >$record['nickname']</th>
+            <th>$record['user_rank']</th>
+            <th>$record['distance']</th>
+            <th>
+                <form action="/selectItemDetail/" method="post">
+                    <input type="hidden" id="itemID" name="itemID" value=$record['proposed_itemID']>
+                    <input type="hidden" id="userDetails" name="notDisplay" value="notDisplay">
+                    <button class="btn btn-success">$record['proposedTitle']</button>
+                </form>
+            </th>
+            <th>
+                <form action="/acceptrejecttrades/" method="post">
+                    <input type="hidden" id="Accept" name="Accept_proposed_date" value=$record['proposed_date']>
+                    <input type="hidden" id="Accept" name="Accept_proposed_itemID" value=$record['proposed_itemID']>
+                    <input type="hidden" id="Accept" name="Accept_desired_itemID" value=$record['desired_itemID']>
+                    <input type="hidden" id="Accept" name="Accept_tradeID" value=$record['tradeID']>
+                    <input type="hidden" id="isAccept" name="isAccept" value=True>
+                    <input type="hidden" id="Accept" name="Accept_proposer_email" value=$record['proposer_email']>
+                    <button class="btn btn-success">Accept</button>
+                </form>
+                <form action="/acceptrejecttrades/" method="post">
+                    <input type="hidden" id="Reject" name="Reject_proposed_date" value=$record['proposed_date']>
+                    <input type="hidden" id="Reject" name="Reject_proposed_itemID" value=$record['proposed_itemID']>
+                    <input type="hidden" id="Reject" name="Reject_desired_itemID" value=$record['desired_itemID']>
+                    <input type="hidden" id="Reject" name="Reject_tradeID" value=$record['tradeID']>
+                    <input type="hidden" id="isAccept" name="isAccept" value=False>
+                    <input type="hidden" id="Reject" name="Reject_proposer_email" value=$record['proposer_email']>
+                    <button class="btn btn-success">Reject</button>
+                </form>
+            </th>
+        </tr>
+    </table>
+</form>
+
+</body>
+</html>

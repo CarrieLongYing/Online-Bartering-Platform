@@ -1,0 +1,38 @@
+$def with (availableItems,distanceWarning,distance, proposedData)
+
+$var pagename : ProposeTrade
+
+<body>
+<h1 class="w3-text-teal">Propose Trade</h1>
+  $if distanceWarning:
+    <h1 style="font-size: 4rem; color: red">The other user is $distance miles away!</h1>
+<p>You are proposing a trade for</p >
+<p>$proposedData['item_title']</p >
+  $if availableItems:
+    <form action="/ProposeTradeConfirmTrade/" method="post">
+    <table>
+      <caption>Please choose your proposed item:</caption>  
+      <tr>
+        <th>Item #</th>
+        <th>Game Type</th>
+        <th>Title</th>
+        <th>Condition</th>
+        <th> </th>
+      </tr>
+      $for record in availableItems:
+        <tr>
+          <th>$record['itemID']</th>
+          <th>$record['game_type']</th>
+          <th>$record['title']</th>
+          <th>$record['item_condition']</th>
+          <th>
+            <input type="radio" name="itemID" value=$record['itemID']>select
+          </th>
+        </tr>
+      <input type="hidden" id="counterparty_email" name="counterparty_email" value=$proposedData["counterparty_email"]>
+      <input type="hidden" id="counterparty_itemID" name="counterparty_itemID" value=$proposedData["counterparty_itemID"]>
+      <button class="btn btn-success">Confirm</button>  
+      </table>
+      </form>
+</body>
+</html>
